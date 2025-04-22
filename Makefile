@@ -23,7 +23,7 @@ lint:
 	pip install flake8
 	flake8 app/
 
-run-server:
+run-dev:
 	uvicorn app.main:app
 
 # Database commands
