@@ -1,0 +1,17 @@
+services:
+  postgres:
+    container_name: levenshtein
+    image: pgvector/pgvector:pg16
+    hostname: localhost
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: levenshtein
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
