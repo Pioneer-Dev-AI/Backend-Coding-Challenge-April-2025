@@ -1,12 +1,15 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Depends
-from sqlmodel import Session
+from Levenshtein import distance
+from fastapi import FastAPI, Depends, Query
+from sqlmodel import Session, select
 
 from app.database import engine, create_db_and_tables
-from app.schemas import PhoneNumberRequest, PhoneNumberResponse
+from app.models import PhoneBook
+from app.schemas import PhoneNumberRequest, PhoneNumberResponse, PhoneNumberMatch
 
 app = FastAPI()
+
 
 def get_session():
     with Session(engine) as session:
@@ -17,16 +20,18 @@ def get_session():
 async def lifespan():
     create_db_and_tables()
 
-@app.post("/lookup", response_model=PhoneNumberResponse)
+
+@app.get("/lookup", response_model=PhoneNumberResponse)
 def lookup_phone_number(
-    request: PhoneNumberRequest,
+    phone_number: str = Query(..., description="Phone number to look up"),
     session: Session = Depends(get_session)
 ):
     pass
 
-@app.get("/search")
+
+@app.get("/search", response_model=)
 def search_phone_numbers(
-    q: str,
+    q: str = Query(..., description="Search query (partial phone number)"),
     session: Session = Depends(get_session)
 ):
-   pass
+  pass

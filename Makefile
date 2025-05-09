@@ -24,7 +24,7 @@ lint:
 	flake8 app/
 
 run-dev:
-	uvicorn app.main:app
+	python -m uvicorn app.main:app
 
 # Database commands
 seed:

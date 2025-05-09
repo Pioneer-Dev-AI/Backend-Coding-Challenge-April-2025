@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 
+from typing import List
+
 class PhoneNumberRequest(BaseModel):
     phone_number: str
 
@@ -9,4 +11,6 @@ class PhoneNumberMatch(BaseModel):
     distance: int
 
 class PhoneNumberResponse(BaseModel):
-    match: PhoneNumberMatch 
+    match: PhoneNumberMatch
+
+
